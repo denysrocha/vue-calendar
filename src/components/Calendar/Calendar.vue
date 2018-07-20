@@ -4,26 +4,25 @@
 
     <div class="month">
       <ul>
-        <li class="prev">&#10094;</li>
-        <li class="next">&#10095;</li>
+        <li class="prev" v-on:click="changeMonth(-1)">&#10094;</li>
+        <li class="next" v-on:click="changeMonth(1)">&#10095;</li>
         <li>
-          {{ labelsMonth[getActualDate().month] }}<br>
-          <span style="font-size:18px">{{ getActualDate().year }}</span>
+          {{ labelsMonth[month] }}<br>
+          <span style="font-size:18px">{{ year }}</span>
         </li>
       </ul>
     </div>
-
     <ul class="weekdays">
       <li v-for="label in labelsWeek">{{ label }}</li>
     </ul>
 
     <ul class="days">
-      <li v-for="day in dayslist">
-        <span v-if="day == null" class="empty">
-          {{ day }}
+      <li v-for="d in dayslist">
+        <span v-if="d == null" class="empty">
+          {{ d.day }}
         </span>
-        <span v-else v-bind:class="{ active: day == daySelected }" v-on:click="selectDay(day)">
-          {{ day }}
+        <span v-else v-bind:class="{ active: d == daySelected }" v-on:click="selectDay(d)">
+          {{ d.day }}
         </span>
       </li>
       <!-- <li><span class="active">10</span></li> -->
