@@ -3,43 +3,42 @@ export default {
   data () {
     return {
       labelsWeek: ['Dom', 'Seg', 'Ter', 'Quar', 'Qui', 'Sex', 'Sab'],
+      labelsMonth: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
       dayslist: [],
-      day_selected: {}
+      daySelected: {}
     }
   },
   methods: {
-    initCalendar() {
-      for (var i = 0; i < 35; i++) {
-        this.dayslist.push({
-          number: null,
-          label: this.labelsWeek[i]
-        })
-      }
-    },
-    getDays() {
+    getActualDate() {
       var today = new Date()
-      var month = today.getMonth() + 1
-      var year = today.getFullYear()
-      var days = new Date(year, month, 0).getDate()
-
-      console.log(this.dayslist.lenght)
-      for (var i = 1; i <= this.dayslist; i++) {
-        console.log(this.dayslist[i])
-        // var date = new Date(year, month - 1, i).getDay()
-        // if (this.labelsWeek[date] == this.dayslist[i].label) {
-        //   this.dayslist.push(i)
-        // }
+      var actualDate = {
+        month: today.getMonth(),
+        year: today.getFullYear()
       }
-      
+      return actualDate
+    },
+    getEmptyArray() {
+      var daysOfMonth = new Date(this.getActualDate().year, this.getActualDate().month + 1, 0).getDate()
+      var fisrtDay = new Date(this.getActualDate().year, this.getActualDate().month, 1).getDay()
+
+      // adding empty days
+      for (var i = 0; i < fisrtDay; i++) {
+        this.dayslist.push(null)
+      }
+
+      //starting to add the numbers of dates
+      for (var i = 1; i <= daysOfMonth; i++) {
+        this.dayslist.push(i)
+      }
     },
     selectDay(day) {
-      this.day_selected = day
-      console.log(day.number)
+      this.daySelected = day
+      console.log(day)
     }
   },
   mounted() {
     //do something after mounting vue instance
-    this.getDays()
-    this.initCalendar()
+    this.getActualDate()
+    this.getEmptyArray()
   }
 }

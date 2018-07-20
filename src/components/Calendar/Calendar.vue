@@ -7,8 +7,8 @@
         <li class="prev">&#10094;</li>
         <li class="next">&#10095;</li>
         <li>
-          August<br>
-          <span style="font-size:18px">2017</span>
+          {{ labelsMonth[getActualDate().month] }}<br>
+          <span style="font-size:18px">{{ getActualDate().year }}</span>
         </li>
       </ul>
     </div>
@@ -18,8 +18,11 @@
     </ul>
 
     <ul class="days">
-      <li v-for="day in dayslist" v-on:click="selectDay(day)">
-        <span v-bind:class="{ active: day == day_selected }">
+      <li v-for="day in dayslist">
+        <span v-if="day == null" class="empty">
+          {{ day }}
+        </span>
+        <span v-else v-bind:class="{ active: day == daySelected }" v-on:click="selectDay(day)">
           {{ day }}
         </span>
       </li>
@@ -35,6 +38,13 @@
 * {box-sizing: border-box;}
 ul {list-style-type: none;}
 body {font-family: Verdana, sans-serif;}
+
+.empty{
+  background-color: #ddd;
+  padding: 6px 14px;
+  cursor: default;
+  border-radius: 5px;
+}
 
 .calendar{
   max-width: 600px;
