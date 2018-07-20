@@ -14,19 +14,13 @@
     </div>
 
     <ul class="weekdays">
-      <li>Dom</li>
-      <li>Seg</li>
-      <li>Ter</li>
-      <li>Qua</li>
-      <li>Qui</li>
-      <li>Sex</li>
-      <li>Sab</li>
+      <li v-for="label in labelsWeek">{{ label }}</li>
     </ul>
 
     <ul class="days">
       <li v-for="day in dayslist" v-on:click="selectDay(day)">
-        <span v-bind:class="{ active: day.number == day_selected.number }">
-          {{ day.number }}
+        <span v-bind:class="{ active: day == day_selected }">
+          {{ day }}
         </span>
       </li>
       <!-- <li><span class="active">10</span></li> -->
