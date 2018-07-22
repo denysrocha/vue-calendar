@@ -4,8 +4,8 @@
 
     <div class="month">
       <ul>
-        <li class="prev" v-on:click="changeMonth(-1)">&#10094;</li>
-        <li class="next" v-on:click="changeMonth(1)">&#10095;</li>
+        <li class="prev" v-on:click="decrementMonth(+1)">&#10094;</li>
+        <li class="next" v-on:click="incrementMonth(1)">&#10095;</li>
         <li>
           {{ labelsMonth[month] }}<br>
           <span style="font-size:18px">{{ year }}</span>
@@ -18,7 +18,7 @@
 
     <ul class="days">
       <li v-for="d in dayslist">
-        <span v-if="d == null" class="empty">
+        <span v-if="d.day == null" class="empty">
           {{ d.day }}
         </span>
         <span v-else v-bind:class="{ active: d == daySelected }" v-on:click="selectDay(d)">
@@ -37,6 +37,10 @@
 * {box-sizing: border-box;}
 ul {list-style-type: none;}
 body {font-family: Verdana, sans-serif;}
+
+.prev, .next {
+  cursor: pointer;
+}
 
 .empty{
   background-color: #ddd;
